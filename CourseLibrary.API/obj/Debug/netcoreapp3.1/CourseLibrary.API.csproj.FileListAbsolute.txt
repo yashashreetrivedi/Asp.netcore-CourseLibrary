@@ -248,3 +248,6 @@ C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\obj\Debu
 C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\obj\Debug\netcoreapp3.1\CourseLibrary.API.dll
 C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\obj\Debug\netcoreapp3.1\CourseLibrary.API.pdb
 C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\yTrivedi\Documents\Asp.netcore-CourseLibrary\CourseLibrary.API\obj\Debug\netcoreapp3.1\CourseLibrary.API.MvcApplicationPartsAssemblyInfo.cache

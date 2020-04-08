@@ -117,5 +117,21 @@ namespace CourseLibrary.API.Controllers
             return NoContent();
 
         }
+        [HttpDelete("{courseId}")]
+        public ActionResult DeleteCourseForAuthor(Guid authorId , Guid courseId)
+        {
+            if (!_courseLibaryRepository.AuthorExists(authorId))
+            {
+                return NotFound();
+            }
+            var courseForAuthorFromRepo = _courseLibaryRepository.GetCourse(authorId, courseId);
+            if (courseForAuthorFromRepo == null)
+            {
+                return NotFound();
+            }
+            _courseLibaryRepository.DeleteCourse(courseForAuthorFromRepo);
+            _courseLibaryRepository.Save();
+            return NoContent();
+        }
     }
 }
