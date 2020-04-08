@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CourseLibrary.API.Models;
 using CourseLibrary.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseLibrary.API.Controllers
@@ -82,7 +83,10 @@ namespace CourseLibrary.API.Controllers
             var courseForAuthorFromRepo = _courseLibaryRepository.GetCourse(authorId, courseId);
             if(courseForAuthorFromRepo == null)
             {
-                return NotFound();
+                var courseToAdd = _mapper.Map<Entities.Course>(courseForUpdateDto);
+                courseToAdd.Id = courseId;
+                _courseLibaryRepository.AddCourse(authorId, courseToAdd);
+                _courseLibaryRepository.Save();
             }
 
             _mapper.Map(courseForUpdateDto, courseForAuthorFromRepo);
@@ -92,5 +96,26 @@ namespace CourseLibrary.API.Controllers
 
         }
 
+        [HttpPatch("{couseId}")]
+        public ActionResult PartiallyUpdateCourseForAuthore(Guid authorId , Guid courseId, 
+            JsonPatchDocument<CourseForUpdateDto> patchdocument)
+        {
+            if (!_courseLibaryRepository.AuthorExists(authorId))
+            {
+                return NotFound();
+            }
+            var courseForAuthorFromRepo = _courseLibaryRepository.GetCourse(authorId, courseId);
+            if (courseForAuthorFromRepo == null)
+            {
+                return NotFound();
+            }
+            var courseToPatch = _mapper.Map<CourseForUpdateDto>(courseForAuthorFromRepo);
+            patchdocument.ApplyTo(courseToPatch);
+            _mapper.Map(courseToPatch, courseForAuthorFromRepo);
+            _courseLibaryRepository.UpdateCourse(courseForAuthorFromRepo);
+            _courseLibaryRepository.Save();
+            return NoContent();
+
+        }
     }
 }
